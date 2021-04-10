@@ -1,11 +1,17 @@
-import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { GlobalStyle } from './styles/global';
 import App from './App';
 
+// context
+import { StoreProvider } from './context/store';
+
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <Router>
+    <GlobalStyle />
+    <StoreProvider>
+      <App />
+    </StoreProvider>
+  </Router>,
   document.getElementById('root')
 );
