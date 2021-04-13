@@ -1,9 +1,7 @@
 import styled from 'styled-components';
+import { IThemeProps } from '../../styled';
 
-// theme
-import { primaryTheme } from '../../themes/theme';
-
-export const Container = styled.div `
+export const Container = styled.div<IThemeProps> `
     width: 98%;
     height: 60px;
     display: flex;
@@ -12,29 +10,33 @@ export const Container = styled.div `
     padding: 0 20px;
     margin: 5px auto;
     border-radius: 6px;
-    box-shadow: ${primaryTheme.shadows.primaryShadow};
+    box-shadow: ${({ theme }) => theme.shadow};
     z-index: 1;
 
-    ${primaryTheme.breakpoints.xLg} {
+    ${({ theme }) => theme.breakpoints.lg} {
         width: 60%;
     }
 
-    ${primaryTheme.breakpoints.xxLg} {
+    ${({ theme }) => theme.breakpoints.xLg} {
+        width: 60%;
+    }
+
+    ${({ theme }) => theme.breakpoints.xxLg} {
         width: 40%; 
     }
 `;
 
-export const Input = styled.input `
+export const Input = styled.input<IThemeProps> `
     border: 0;
     outline: 0;
     flex: 1;
     font-size: 0.875rem;
     font-weight: 500;
     line-height: 1rem;
-    color: ${primaryTheme.colors.placeholder};
+    color: ${({ theme }) => theme.colors.secondaryLightGrey};
     margin: 0 15px;
 
-    ${primaryTheme.breakpoints.xLg} {
+    ${({ theme }) => theme.breakpoints.xLg} {
         font-size: 1rem;
     }
 `;
