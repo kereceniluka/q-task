@@ -1,24 +1,18 @@
 import styled from 'styled-components';
+import { IThemeProps } from '../../styled';
 
-// theme
-import { primaryTheme } from '../../themes/theme';
-
-export const Container = styled.div `
+export const Container = styled.div<IThemeProps> `
     display: grid;
     grid-template-columns: 100%;
+    align-items: flex-start;
     row-gap: 20px;
 
-    ${primaryTheme.breakpoints.md} {
+    ${({ theme }) => theme.breakpoints.md} {
         grid-template-columns: repeat(2, 1fr);
         gap: 20px 10px;
     }
 
-    ${primaryTheme.breakpoints.xLg} {
+    ${({ theme }) => theme.breakpoints.xLg} {
         grid-template-columns: repeat(3, 1fr);
-        margin-top: 100px;
     }
-
-    ${primaryTheme.breakpoints.xxLg} {
-        grid-template-columns: repeat(4, 1fr);
-    } 
 `;
