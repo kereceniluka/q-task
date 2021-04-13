@@ -1,31 +1,11 @@
-interface IState {
-    posts: { 
-        loading: boolean | null; 
-        data: IPost[];
-        error: string | null; 
-    };
-    comments: {
-        loading: boolean | null; 
-        data: IComment[];
-        error: string | null;
-    };
-    users: {
-        loading: boolean | null;
-        data: IUser[];
-        error: string | null;
-    };
-}
-
-interface IAction {
-    type: string;
-    payload?: any;
-}
-
-interface IPostCard {
-    key: number;
-    windowSize: number;
-    post: IPost;
-    user: IUser[];
+interface IStore {
+    loading: boolean | null;
+    error: string | null;
+    data: {
+        posts: IPost[];
+        comments: IComment[];
+        users: IUser[];
+    },
 }
 
 interface IPost {
@@ -67,8 +47,31 @@ interface IUser {
     };
 }
 
-interface IAnimatedButton {
-    children?: any;
-    className?: string;
-    to: string;
+interface IAction {
+    type: string;
+    payload?: any;
+}
+
+interface ICard {
+    post: IPost;
+    user: IUser[];
+    comments: IComment[];
+}
+
+interface ICommentItem {
+    comment: IComment;
+}
+
+interface IAccordion {
+    title: string;
+    numOfRecords?: number;
+}
+
+interface IAlert {
+    variant: 'error' | 'info' | 'success';
+    text: string;
+}
+
+interface ISpinner {
+    icon: string;
 }
