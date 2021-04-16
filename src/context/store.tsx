@@ -6,6 +6,10 @@ import {
     FETCH_DATA_REQUEST, 
     FETCH_DATA_SUCCESS, 
     FETCH_DATA_FAIL,
+    SEARCH_POSTS_REQUEST,
+    SEARCH_POSTS_FAIL,
+    SEARCH_POSTS_SUCCESS,
+    SEARCH_POSTS_RESET,
 } from './constants';
 
 // reducers
@@ -21,6 +25,7 @@ const initialState: IStore = {
         posts: [],
         comments: [],
         users: [],
+        searchedPosts: []
     },
 }
 
@@ -55,13 +60,37 @@ export const StoreProvider: React.FC = (props: any) => {
         }
     }
 
+    const searchPosts = async (term: string) => {
+
+        dispatch({ type: SEARCH_POSTS_REQUEST });
+
+        const user = state.data.users.find((user: IUser) => user.name.includes(term) || user.email.includes(term));
+
+        try {
+
+            if (user?.id && term) {
+
+                const { data } = await api.get(`/users/${user.id}/posts`);
+                dispatch({ type: SEARCH_POSTS_SUCCESS, payload: data });
+            
+            } else if (term === '') {
+                dispatch({ type: SEARCH_POSTS_RESET });
+            }
+
+        } catch (error) {
+            dispatch({ type: SEARCH_POSTS_FAIL, payload: error });
+        }
+    }
+
     const value = {
         posts: state.data.posts,
         comments: state.data.comments,
         users: state.data.users,
+        searchedPosts: state.data.searchedPosts,
         loading: state.loading,
         error: state.error,
         fetchData,
+        searchPosts,
     }
 
     return (

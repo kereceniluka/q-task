@@ -21,7 +21,7 @@ import { Store } from '../context/store';
 
 const Posts: React.FC = () => {
 
-    const { fetchData, posts, comments, users, loading, error } = useContext(Store);
+    const { fetchData, posts, comments, users, searchedPosts, loading, error } = useContext(Store);
 
     useEffect(() => {
         fetchData();
@@ -37,12 +37,19 @@ const Posts: React.FC = () => {
                     {loading ? 
                         <Spinner icon={spinner} /> : (
                         <PostsList>
-                            {posts.map((post: IPost) => <Card 
-                                                            key={post.id} 
-                                                            post={post} 
-                                                            user={users.filter((user: IUser) => user.id === post.userId)} 
-                                                            comments={comments.filter((comment: IComment) => comment.postId === post.id)} />
-                            )}
+                            {searchedPosts && searchedPosts?.length ? (
+                                searchedPosts.map((post: IPost) => <Card 
+                                                                        key={post.id} 
+                                                                        post={post} 
+                                                                        user={users.filter((user: IUser) => user.id === post.userId)} 
+                                                                        comments={comments.filter((comment: IComment) => comment.postId === post.id)} />)
+                            ) : (
+                                posts.map((post: IPost) => <Card 
+                                                                key={post.id} 
+                                                                post={post} 
+                                                                user={users.filter((user: IUser) => user.id === post.userId)} 
+                                                                comments={comments.filter((comment: IComment) => comment.postId === post.id)} />
+                            ))}
                         </PostsList>
                     )}
                     {error && <Alert variant="error" text={error} />}
