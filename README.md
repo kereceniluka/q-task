@@ -27,4 +27,4 @@
 
 # Demo
 
-- [QTask](https://github.com/facebook/create-react-app) - check the link for a live preview
+- [QTask](https://q-task.netlify.app/) - check the link for a live preview
