@@ -24,6 +24,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "jtest": "jest",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -46,6 +47,8 @@
   },
   "devDependencies": {
     "@types/react-router-dom": "^5.1.7",
-    "@types/styled-components": "^5.1.9"
+    "@types/styled-components": "^5.1.9",
+    "ts-jest": "^26.5.4",
+    "ts-node": "^9.1.1"
   }
 }

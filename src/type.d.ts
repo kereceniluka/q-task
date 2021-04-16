@@ -5,7 +5,8 @@ interface IStore {
         posts: IPost[];
         comments: IComment[];
         users: IUser[];
-    },
+        searchedPosts: IPost[];
+    };
 }
 
 interface IPost {
@@ -74,4 +75,8 @@ interface IAlert {
 
 interface ISpinner {
     icon: string;
+}
+
+type GreetingProp = {
+    message: string;
 }
