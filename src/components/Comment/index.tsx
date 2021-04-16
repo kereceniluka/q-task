@@ -5,13 +5,14 @@ import {
     Content,
 } from './style';
 
-const Comment: React.FC<ICommentItem> = ({ comment }) => {
+// hoc
+import { withGreeting } from '../../hoc/withGreeting';
+
+const Comment: React.FC<ICommentItem> = withGreeting(({ comment, message }) => {
 
     const [user, setUser] = useState({});
 
-    useEffect(() => {
-        
-    }, [comment]);
+    useEffect(() => console.log(`${message} ${Comment.displayName}`), []);
 
     return (
         <Container>
@@ -19,6 +20,8 @@ const Comment: React.FC<ICommentItem> = ({ comment }) => {
             <Content>{comment.body}</Content>
         </Container>
     );
-}
+})
+
+Comment.displayName = 'Comment component';
 
 export default Comment;

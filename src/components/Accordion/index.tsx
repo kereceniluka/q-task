@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
     Container,
     Header,
@@ -8,9 +8,14 @@ import {
 import { IconContext } from 'react-icons';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 
-const Accordion: React.FC<IAccordion> = ({ title, children, numOfRecords }) => {
+// hoc
+import { withGreeting } from '../../hoc/withGreeting';
+
+const Accordion: React.FC<IAccordion> = withGreeting(({ title, children, numOfRecords, message }) => {
 
     const [clicked, setClicked] = useState(false);
+
+    useEffect(() => console.log(`${message} ${Accordion.displayName}`), []);
 
     return (
         <Container>
@@ -25,6 +30,8 @@ const Accordion: React.FC<IAccordion> = ({ title, children, numOfRecords }) => {
             </Body>
         </Container>
     );
-}
+})
+
+Accordion.displayName = 'Accordion component';
 
 export default Accordion;
